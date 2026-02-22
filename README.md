@@ -50,6 +50,7 @@ The system consists of the following components:
 - Uvicorn
 - LangChain
 - Sentence Transformers
+- LLaMA 4 Maverick (via Groq API)
 - Pickle (for vector store persistence)
 - HTML & CSS (frontend)
 
