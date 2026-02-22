@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Chatbot</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #4facfe, #ff6ec7);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-box {
+            background: white;
+            width: 500px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4facfe;
+        }
+
+        .chat-history {
+            max-height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 75%;
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+
+        /* USER BUBBLE */
+        .user-message {
+            align-self: flex-end;
+            background-color: #4facfe;
+            color: white;
+        }
+
+        /* BOT BUBBLE */
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f1f1;
+            color: black;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: none;
+            background-color: #ff6ec7;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<script>
+    window.onload = function() {
+        const chatBox = document.getElementById("chat-history");
+        chatBox.scrollTop = chatBox.scrollHeight;
+    };
+</script>
+<body>
+    <div class="chat-box">
+        <h2>💊 Personalized Patient Assistant</h2>
+
+        <!-- Chat History -->
+        <div class="chat-history" id="chat-history" >
+            {% for chat in chat_history %}
+                <div class="message user-message">
+                    {{ chat.question }}
+                </div>
+
+                <div class="message bot-message">
+                    {{ chat.answer }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Send Question -->
+        <form action="/" method="post" style="margin-top:10px;">
+            <input type="text" name="question" placeholder="Ask your question..." required>
+            <button type="submit">Send</button>
+        </form>
+
+        <!-- Clear Button -->
+        <form action="/clear" method="post" style="margin-top:10px;">
+            <button type="submit">Clear All</button>
+        </form>
+
+    </div>
+</body>
+</html>
